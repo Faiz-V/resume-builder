@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历模板与简历优化</title>
+    <!-- Tailwind CSS CDN：一个实用的 CSS 框架，通过类名快速设置样式 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 自定义样式文件 -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome 图标库 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas：将 HTML 元素转换为图片（用于导出 PNG 和 PDF） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF：生成 PDF 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 顶部导航栏 -->
+    <nav class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- 网站标题 -->
+            <h1 class="text-2xl font-bold"><i class="fas fa-file-alt mr-2"></i>简历助手</h1>
+            <!-- 导航按钮 -->
+            <div class="space-x-4">
+                <button id="btn-nav-templates" class="px-4 py-2 rounded hover:bg-blue-700 transition">
+                    <i class="fas fa-th-large mr-1"></i>选择模板
+                </button>
+                <button id="btn-nav-editor" class="px-4 py-2 rounded hover:bg-blue-700 transition">
+                    <i class="fas fa-edit mr-1"></i>编辑简历
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== 模板选择页面 ==================== -->
+    <section id="page-templates" class="container mx-auto py-10 px-4">
+        <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">选择简历模板</h2>
+        <p class="text-center text-gray-600 mb-10">点击模板即可进入编辑模式，实时预览效果</p>
+        
+        <!-- 模板卡片网格：3列布局 -->
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- 模板1：简约风 -->
+            <div class="template-card bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition duration-300" data-template="minimal">
+                <!-- 模板预览图（用 HTML 模拟） -->
+                <div class="h-72 bg-gray-50 flex items-center justify-center border-b p-6">
+                    <div class="w-full h-full bg-white border border-gray-200 p-4 shadow-sm">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <div class="h-3 w-24 bg-gray-400 mx-auto rounded mb-1"></div>
+                            <div class="h-2 w-16 bg-gray-300 mx-auto rounded"></div>
+                        </div>
+                        <div class="h-2 w-full bg-gray-200 rounded mb-2"></div>
+                        <div class="h-2 w-4/5 bg-gray-200 rounded mb-2"></div>
+                        <div class="h-2 w-3/5 bg-gray-200 rounded"></div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">简约风</h3>
+                    <p class="text-gray-600 text-sm">简洁大方，突出重点，适合互联网、技术类岗位</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-2 py-1 bg-gray-100 text-xs rounded text-gray-600">清爽</span>
+                        <span class="px-2 py-1 bg-gray-100 text-xs rounded text-gray-600">易读</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模板2：商务风 -->
+            <div class="template-card bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition duration-300" data-template="business">
+                <div class="h-72 bg-blue-50 flex items-center justify-center border-b p-6">
+                    <div class="w-full h-full bg-white border border-gray-200 flex shadow-sm">
+                        <div class="w-1/3 bg-blue-900 h-full p-3">
+                            <div class="w-8 h-8 bg-blue-700 rounded-full mb-2"></div>
+                            <div class="h-2 w-full bg-blue-700 rounded mb-1"></div>
+                            <div class="h-2 w-2/3 bg-blue-700 rounded"></div>
+                        </div>
+                        <div class="w-2/3 p-3">
+                            <div class="h-3 w-3/4 bg-gray-400 rounded mb-2"></div>
+                            <div class="h-2 w-full bg-gray-200 rounded mb-1"></div>
+                            <div class="h-2 w-4/5 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">商务风</h3>
+                    <p class="text-gray-600 text-sm">专业稳重，结构清晰，适合金融、咨询、传统行业</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-2 py-1 bg-blue-50 text-xs rounded text-blue-600">专业</span>
+                        <span class="px-2 py-1 bg-blue-50 text-xs rounded text-blue-600">稳重</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模板3：创意风 -->
+            <div class="template-card bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition duration-300" data-template="creative">
+                <div class="h-72 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center border-b p-6">
+                    <div class="w-full h-full bg-white p-4 rounded-lg shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg"></div>
+                            <div>
+                                <div class="h-3 w-20 bg-gray-400 rounded mb-1"></div>
+                                <div class="h-2 w-14 bg-gray-300 rounded"></div>
+                            </div>
+                        </div>
+                        <div class="h-2 w-full bg-gray-200 rounded mb-2"></div>
+                        <div class="h-2 w-5/6 bg-gray-200 rounded mb-2"></div>
+                        <div class="flex gap-2 mt-3">
+                            <div class="h-6 w-12 bg-purple-100 rounded-full"></div>
+                            <div class="h-6 w-12 bg-pink-100 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">创意风</h3>
+                    <p class="text-gray-600 text-sm">个性鲜明，设计感十足，适合设计、营销、新媒体岗位</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-2 py-1 bg-purple-50 text-xs rounded text-purple-600">个性</span>
+                        <span class="px-2 py-1 bg-pink-50 text-xs rounded text-pink-600">时尚</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 简历编辑页面 ==================== -->
+    <section id="page-editor" class="hidden h-[calc(100vh-64px)]">
+        <div class="flex h-full">
+            <!-- 左侧：表单填写区 -->
+            <div class="w-1/2 overflow-y-auto p-6 bg-white border-r border-gray-200">
+                <!-- 顶部工具栏 -->
+                <div class="flex justify-between items-center mb-6 sticky top-0 bg-white pb-4 border-b z-10">
+                    <h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-edit mr-2 text-blue-600"></i>填写简历信息</h2>
+                    <button id="btn-optimize" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md">
+                        <i class="fas fa-magic mr-2"></i>AI 优化
+                    </button>
+                </div>
+                
+                <!-- 个人信息模块 -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-bold mb-4 text-blue-600 flex items-center">
+                        <i class="fas fa-user-circle mr-2"></i>个人信息
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">姓名 <span class="text-red-500">*</span></label>
+                            <input type="text" id="input-name" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="请输入姓名">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">电话</label>
+                            <input type="text" id="input-phone" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="请输入电话">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
+                            <input type="email" id="input-email" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="请输入邮箱">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">求职意向</label>
+                            <input type="text" id="input-job" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition" placeholder="如：前端工程师">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">个人简介</label>
+                        <textarea id="input-summary" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none transition resize-none" placeholder="简要介绍自己的优势、经验、职业目标..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 教育背景模块（可动态添加多个） -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-blue-600 flex items-center">
+                            <i class="fas fa-graduation-cap mr-2"></i>教育背景
+                        </h3>
+                        <button id="btn-add-edu" class="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 border border-blue-600 rounded hover:bg-blue-50 transition">
+                            <i class="fas fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    <!-- 教育背景条目容器 -->
+                    <div id="edu-list" class="space-y-4"></div>
+                </div>
+
+                <!-- 工作经历模块 -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-blue-600 flex items-center">
+                            <i class="fas fa-briefcase mr-2"></i>工作经历
+                        </h3>
+                        <button id="btn-add-work" class="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 border border-blue-600 rounded hover:bg-blue-50 transition">
+                            <i class="fas fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    <div id="work-list" class="space-y-4"></div>
+                </div>
+
+                <!-- 项目经验模块 -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-blue-600 flex items-center">
+                            <i class="fas fa-project-diagram mr-2"></i>项目经验
+                        </h3>
+                        <button id="btn-add-project" class="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 border border-blue-600 rounded hover:bg-blue-50 transition">
+                            <i class="fas fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    <div id="project-list" class="space-y-4"></div>
+                </div>
+
+                <!-- 技能特长模块 -->
+                <div class="mb-8 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-blue-600 flex items-center">
+                            <i class="fas fa-tools mr-2"></i>技能特长
+                        </h3>
+                        <button id="btn-add-skill" class="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 border border-blue-600 rounded hover:bg-blue-50 transition">
+                            <i class="fas fa-plus mr-1"></i>添加
+                        </button>
+                    </div>
+                    <div id="skill-list" class="space-y-4"></div>
+                </div>
+
+                <!-- 导出按钮区 -->
+                <div class="flex gap-4 mt-8 mb-12">
+                    <button id="btn-export-pdf" class="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition shadow-md flex items-center justify-center">
+                        <i class="fas fa-file-pdf mr-2 text-xl"></i>
+                        <div class="text-left">
+                            <div class="font-bold">导出 PDF</div>
+                            <div class="text-xs opacity-90">适合打印和投递</div>
+                        </div>
+                    </button>
+                    <button id="btn-export-png" class="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition shadow-md flex items-center justify-center">
+                        <i class="fas fa-image mr-2 text-xl"></i>
+                        <div class="text-left">
+                            <div class="font-bold">导出 PNG</div>
+                            <div class="text-xs opacity-90">适合在线分享</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 右侧：实时预览区 -->
+            <div class="w-1/2 bg-gray-300 overflow-y-auto p-8 flex justify-center">
+                <!-- A4 纸尺寸的预览容器 -->
+                <div id="resume-preview" class="bg-white shadow-2xl w-full max-w-[210mm] min-h-[297mm] p-[15mm]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== AI 优化建议弹窗 ==================== -->
+    <div id="optimize-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden m-4 flex flex-col">
+            <!-- 弹窗头部 -->
+            <div class="p-6 border-b bg-purple-50 flex justify-between items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-purple-700"><i class="fas fa-lightbulb mr-2"></i>AI 优化建议</h3>
+                    <p class="text-sm text-purple-600 mt-1">基于您的简历内容，我们为您提供以下改进建议</p>
+                </div>
+                <button id="btn-close-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <!-- 建议内容区 -->
+            <div id="optimize-content" class="p-6 overflow-y-auto flex-1 space-y-4"></div>
+            <!-- 弹窗底部 -->
+            <div class="p-6 border-t bg-gray-50">
+                <button id="btn-close-modal-2" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-medium">
+                    知道了，去修改
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 脚本文件引入 ==================== -->
+    <!-- 注意：按照依赖顺序加载 -->
+    <!-- 1. 模板定义（先加载，因为其他模块依赖它） -->
+    <script src="js/templates.js"></script>
+    <!-- 2. 编辑器逻辑（管理数据和表单） -->
+    <script src="js/editor.js"></script>
+    <!-- 3. 优化建议逻辑 -->
+    <script src="js/optimizer.js"></script>
+    <!-- 4. 导出功能 -->
+    <script src="js/export.js"></script>
+    <!-- 5. 主逻辑（最后加载，负责整合所有模块） -->
+    <script src="js/app.js"></script>
+</body>
+</html>
