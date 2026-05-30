@@ -1,0 +1,437 @@
+/**
+ * style.css - 自定义样式文件
+ * 
+ * 这个文件补充 Tailwind CSS 没有覆盖到的特殊样式，
+ * 特别是简历预览的排版和打印相关样式。
+ */
+
+/* ==================== 全局样式 ==================== */
+
+/* 自定义滚动条样式，让页面看起来更精致 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ==================== 模板卡片动画 ==================== */
+.template-card {
+    transition: all 0.3s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ==================== 简历预览容器 ==================== */
+#resume-preview {
+    /* A4 纸尺寸：210mm x 297mm */
+    width: 210mm;
+    min-height: 297mm;
+    /* 确保打印时背景色不被去掉 */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    /* 防止内容溢出 */
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* ==================== 简约风简历样式 ==================== */
+.resume-minimal {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.resume-minimal .resume-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333;
+    margin-bottom: 24px;
+}
+
+.resume-minimal .resume-name {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.resume-minimal .resume-contact {
+    color: #666;
+    font-size: 14px;
+}
+
+.resume-minimal .resume-section {
+    margin-bottom: 24px;
+}
+
+.resume-minimal .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.resume-minimal .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+}
+
+.resume-minimal .item-title {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.resume-minimal .item-subtitle {
+    color: #666;
+    font-size: 14px;
+}
+
+.resume-minimal .item-time {
+    color: #888;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.resume-minimal .item-desc {
+    color: #555;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.resume-minimal .skill-item {
+    display: inline-block;
+    background: #f3f4f6;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin: 4px 4px 4px 0;
+    font-size: 13px;
+}
+
+/* ==================== 商务风简历样式 ==================== */
+.resume-business {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #2c3e50;
+    line-height: 1.6;
+    display: flex;
+}
+
+.resume-business .resume-sidebar {
+    width: 30%;
+    background: #1e3a5f;
+    color: white;
+    padding: 30px 20px;
+    min-height: 267mm;
+}
+
+.resume-business .resume-main {
+    width: 70%;
+    padding: 30px;
+}
+
+.resume-business .sidebar-name {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.resume-business .sidebar-job {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.resume-business .sidebar-section {
+    margin-bottom: 24px;
+}
+
+.resume-business .sidebar-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.resume-business .sidebar-item {
+    font-size: 13px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.resume-business .main-section {
+    margin-bottom: 28px;
+}
+
+.resume-business .main-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e3a5f;
+    border-bottom: 2px solid #1e3a5f;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+.resume-business .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+}
+
+.resume-business .item-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #2c3e50;
+}
+
+.resume-business .item-subtitle {
+    color: #555;
+    font-size: 14px;
+}
+
+.resume-business .item-time {
+    color: #7f8c8d;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.resume-business .item-desc {
+    color: #555;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* ==================== 创意风简历样式 ==================== */
+.resume-creative {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.resume-creative .creative-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    margin: -15mm -15mm 30px -15mm;
+    width: calc(100% + 30mm);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.resume-creative .avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.resume-creative .header-info h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.resume-creative .header-info p {
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+.resume-creative .creative-section {
+    margin-bottom: 28px;
+}
+
+.resume-creative .creative-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #764ba2;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resume-creative .creative-section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #764ba2 0%, transparent 100%);
+}
+
+.resume-creative .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.resume-creative .item-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #444;
+}
+
+.resume-creative .item-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.resume-creative .item-time {
+    color: #999;
+    font-size: 13px;
+    background: #f3f4f6;
+    padding: 2px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.resume-creative .item-desc {
+    color: #555;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.resume-creative .skill-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin: 4px 4px 4px 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ==================== 表单条目样式 ==================== */
+.form-item {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+}
+
+.form-item .btn-delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.form-item .btn-delete:hover {
+    background: #fee2e2;
+}
+
+/* ==================== 优化建议弹窗内样式 ==================== */
+.suggestion-card {
+    border-left: 4px solid;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    background: #f9fafb;
+}
+
+.suggestion-card.error {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.suggestion-card.warning {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.suggestion-card.success {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+
+.suggestion-card.info {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.suggestion-card h4 {
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.suggestion-card p {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ==================== 打印样式 ==================== */
+@media print {
+    /* 打印时隐藏导航栏、按钮等不需要打印的元素 */
+    nav,
+    #page-templates,
+    .sticky,
+    button {
+        display: none !important;
+    }
+    
+    /* 编辑器页面在打印时只显示预览区域 */
+    #page-editor {
+        display: block !important;
+    }
+    
+    #page-editor > div {
+        display: block !important;
+    }
+    
+    #page-editor .w-1\/2:first-child {
+        display: none !important;
+    }
+    
+    #page-editor .w-1\/2:last-child {
+        width: 100% !important;
+        background: white !important;
+        padding: 0 !important;
+    }
+    
+    #resume-preview {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
